@@ -22,6 +22,7 @@ from PyQt5.QtGui import (
     QFont,
     QIcon,
     QColor,
+    QPalette
 )
 from PyQt5.QtCore import QSize, Qt
 
@@ -56,7 +57,7 @@ class MemoListWindow(QMainWindow):
     def init_gui(self):
         """窗口布局"""
         # 窗口名
-        self.setWindowTitle("MemoList")
+        self.setWindowTitle("便签列表")
 
         # 窗口图标
         self.setWindowIcon(QIcon("icon/journals.png"))
@@ -252,9 +253,13 @@ class MemoListWindow(QMainWindow):
             memo_window.text_box.setHtml(content)
 
     def show_setting(self):
-        """TODO: 打开设置窗口"""
+        """打开设置窗口"""
         if not self.memo_app.is_setting_window_open:
-            self.memo_app.memo_setting_window = MemoSettingWindow()
+            pos_x, pos_y = self.cal_memo_pos()
+            self.memo_app.memo_setting_window = MemoSettingWindow(
+                self.memo_app, pos_x, pos_y)
+        else:
+            self.memo_app.memo_setting_window.showNormal()
 
     def closeEvent(self, event):
         """关闭便签列表窗口"""
@@ -285,7 +290,7 @@ class MemoWindow(QMainWindow):
     def init_gui(self, pos_x, pos_y):
         """窗口布局"""
         # 窗口名
-        self.setWindowTitle("Memo")
+        self.setWindowTitle("便签")
 
         # 窗口图标
         self.setWindowIcon(QIcon("icon/journal-richtext.png"))
@@ -293,6 +298,16 @@ class MemoWindow(QMainWindow):
         # 窗口大小
         pos_x, pos_y
         self.setGeometry(pos_x, pos_y, 450, 450)
+
+        # 窗口颜色
+        color = self.memo_app.setting_info["background"]["rgb"]
+        palette = QPalette()
+        palette.setColor(QPalette.Window, QColor(color[0], color[1], color[2]))
+        self.setPalette(palette)
+
+        # 窗口透明度
+        opacity_value = self.memo_app.setting_info["opacity"]
+        self.setWindowOpacity(opacity_value)
 
         # 工具栏和文本框
         self.set_tool_bar()
@@ -397,6 +412,11 @@ class MemoWindow(QMainWindow):
         self.text_box = QTextEdit(self, placeholderText="开始记录...")
         font = QFont("微软雅黑", 12)
         self.text_box.setFont(font)
+
+        color = self.memo_app.setting_info["background"]["rgb"]
+        palette = QPalette()
+        palette.setColor(QPalette.Base, QColor(color[0], color[1], color[2]))
+        self.text_box.setPalette(palette)
 
     def toggle_bold(self):
         """粗体"""

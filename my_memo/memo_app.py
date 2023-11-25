@@ -20,7 +20,6 @@ TODO:
 --------------------
 
 设置界面
-- 皮肤
 - README (加上icon来源, 协议)
 
 收尾
@@ -48,6 +47,10 @@ class MemoApp(QMainWindow):
         self.memo_info = {}
         self.load_memo_info()
 
+        # 设置信息：包括便签背景颜色、透明度
+        self.setting_info = {}
+        self.load_setting_info()
+
         # 便签列表
         self.is_memo_list_open = True
         self.memo_list_window = MemoListWindow(self)
@@ -74,6 +77,19 @@ class MemoApp(QMainWindow):
         """保存便签信息到json文件"""
         with open("memo_info.json", "w") as json_file:
             json.dump(self.memo_info, json_file, indent=4)
+
+    def load_setting_info(self):
+        """从json文件加载设置信息"""
+        try:
+            with open("setting_info.json", "r") as json_file:
+                self.setting_info = json.load(json_file)
+        except FileNotFoundError:
+            pass
+
+    def save_setting_info(self):
+        """保存设置信息到json文件"""
+        with open("setting_info.json", "w") as json_file:
+            json.dump(self.setting_info, json_file, indent=4)
 
     def delete_file(self, file_path):
         """删除文件"""

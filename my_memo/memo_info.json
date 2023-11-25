@@ -1,28 +1,12 @@
 {
-    "note20231105155438.html": {
+    "note20231125164310.html": {
         "image": [
-            "20231105155450-\u6ce2\u5947\u9171.JPG"
+            "20231125164322-\u6ce2\u5947\u9171.JPG"
         ],
         "abstract": {
-            "title": "\u4f60\u597d\u4e16\u754c",
+            "title": "hello world",
             "content": "",
-            "first_image": "assets/20231105155450-\u6ce2\u5947\u9171.JPG"
-        }
-    },
-    "note20231124185659.html": {
-        "image": [],
-        "abstract": {
-            "title": "\u5728\u8fd1",
-            "content": "111",
-            "first_image": ""
-        }
-    },
-    "note20231124214327.html": {
-        "image": [],
-        "abstract": {
-            "title": "\u4f60\u597d",
-            "content": "",
-            "first_image": ""
+            "first_image": "assets/20231125164322-\u6ce2\u5947\u9171.JPG"
         }
     }
 }

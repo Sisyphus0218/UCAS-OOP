@@ -1,0 +1,12 @@
+{
+    "opacity": 1.0,
+    "background": {
+        "color": "blue",
+        "rgb": [
+            226,
+            241,
+            255
+        ],
+        "index": 2
+    }
+}
